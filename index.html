@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARDIOPULSE · Clinical Suite</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <h1>❤️ CARDIOPULSE</h1>
+            <div class="error" id="loginError"></div>
+            <input type="email" id="email" placeholder="Email" value="cardiologist@hospital.org">
+            <input type="password" id="pass" placeholder="Password" value="cardio2024">
+            <button id="loginBtn">SIGN IN</button>
+            <button id="guestBtn">GUEST ACCESS</button>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div class="app-container" id="app">
+        <div class="card">
+            <div class="header">
+                <h1>❤️ CARDIOPULSE</h1>
+                <button class="logout-btn" id="logoutBtn">END SESSION</button>
+            </div>
+            <div class="tagline">"Real‑time cardiovascular monitoring & cognitive assessment"</div>
+            <div class="patient-banner">ACTIVE PATIENT · ID: <span class="patient-id" id="userEmail">CARDIOLOGIST</span></div>
+            <div class="heart-display">
+                <span class="heart-icon">❤️</span>
+                <span class="hr-number" id="hr">79</span>
+                <span class="hr-unit">BPM</span>
+            </div>
+            <div class="status" id="status">HEART STATUS: GOOD</div>
+            <div class="stimulus-box" id="box"></div>
+            <div class="rt-container">
+                <div class="rt-label">SIGNAL RESPONSE TIME</div>
+                <span class="rt-value" id="reaction">384</span><span class="rt-unit">ms</span>
+            </div>
+            <div class="level-container">
+                <div class="level-btn selected" id="l1">REST</div>
+                <div class="level-btn" id="l2">MODERATE</div>
+                <div class="level-btn" id="l3">CHALLENGE</div>
+            </div>
+            <div class="action-row">
+                <button class="action-btn start-btn" id="startBtn">START</button>
+                <div class="led" id="activeLed"></div>
+                <span class="led-label">active</span>
+                <button class="action-btn reset-btn" id="resetBtn">RESET</button>
+            </div>
+            <div class="info-bar">
+                <span>⏱️ <span id="timer">00:00</span></span>
+                <span>📊 <span id="fatigue">0%</span></span>
+                <span>🔊 <span id="sound">on</span></span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="metrics-title">PATIENT METRICS</div>
+            <div class="metric-grid">
+                <div class="metric-cell"><span class="metric-value" id="avg">—</span><span class="metric-label">AVG MS</span></div>
+                <div class="metric-cell"><span class="metric-value" id="best">—</span><span class="metric-label">BEST</span></div>
+                <div class="metric-cell"><span class="metric-value" id="risk">LOW</span><span class="metric-label">RISK</span></div>
+            </div>
+            <div class="metric-grid grid-4">
+                <div class="metric-cell"><span class="metric-value" id="hrAvg">79</span><span class="metric-label">HR</span></div>
+                <div class="metric-cell"><span class="metric-value" id="hrv">42</span><span class="metric-label">HRV</span></div>
+                <div class="metric-cell"><span class="metric-value" id="fatigueScore">0%</span><span class="metric-label">FATIGUE</span></div>
+                <div class="metric-cell"><span class="metric-value" id="std">—</span><span class="metric-label">STD DEV</span></div>
+            </div>
+            <div class="chart-container"><canvas id="hrChart" height="80"></canvas></div>
+            <div class="clinical-note" id="advice">✅ HEART STATUS: NORMAL</div>
+            <div class="history-panel" id="history"></div>
+            <div class="sync-status" id="fbStatus">💾 synced to cloud</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
